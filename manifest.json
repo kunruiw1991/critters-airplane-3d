@@ -1,0 +1,25 @@
+{
+  "name": "Smiling Critters 3D Sky & Airplane Adventure: Bay Area to Boston",
+  "short_name": "Critters 3D Sky",
+  "description": "Standalone 3D WebGL / Three.js Smiling Critters Airplane Adventure from Mom in San Francisco (Golden Gate Bridge) to Daughter in Boston (Zakim Bridge).",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0e24",
+  "theme_color": "#e89125",
+  "icons": [
+    {
+      "src": "./assets/custom_critter_fox_lantern.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/custom_critter_bat_moonstar.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

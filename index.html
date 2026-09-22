@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Critters 3D Sky" />
+  <meta name="theme-color" content="#0b0e24" />
+  <title>Smiling Critters 3D Sky &amp; Airplane Adventure: Bay Area ✈️ Boston</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./assets/custom_critter_fox_lantern.jpg" />
+  <link rel="stylesheet" href="./src/styles/main.css" />
+</head>
+<body>
+  <div id="app-root">
+    <!-- Shared 60 FPS WebGL 2.0 Canvas (preserveDrawingBuffer: true) -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Top Navigation Header -->
+    <header class="top-nav">
+      <div class="brand-badge">
+        <span class="brand-icon">✈️</span>
+        <div class="brand-titles">
+          <h1>Smiling Critters 3D Sky &amp; Airplane Adventure</h1>
+          <p>Mom in San Francisco (Golden Gate Bridge) ✈️ Daughter in Boston (Zakim Bridge)</p>
+        </div>
+      </div>
+
+      <nav class="nav-tabs" aria-label="Main Views">
+        <button class="nav-tab-btn active" data-view="character_studio" id="tab-character-studio">
+          🦊🦇 3D Character Studio
+        </button>
+        <button class="nav-tab-btn" data-view="flight_simulator" id="tab-flight-simulator">
+          🌉✈️🏙️ SF ➔ Boston Sky Flight
+        </button>
+        <button class="nav-tab-btn" data-view="hangar" id="tab-hangar">
+          🛠️ 3D Airplane Hangar
+        </button>
+        <button class="nav-tab-btn" data-view="photo_booth" id="tab-photo-booth">
+          📸 Cockpit Photo Booth
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-pill-btn" id="btn-swap-roles-top" data-action="swap-roles" title="Swap Pilot and Co-Pilot">
+          🔄 Swap Pilot ↔ Co-Pilot
+        </button>
+        <button class="icon-pill-btn" id="btn-toggle-audio">
+          🔊 Plush Synth On
+        </button>
+      </div>
+    </header>
+
+    <!-- ==================== VIEW 1: 3D CHARACTER STUDIO ==================== -->
+    <section class="view-overlay active" id="view-character-studio" data-view="character_studio">
+      <div class="studio-left-col">
+        <div class="glass-panel">
+          <div class="panel-title">🎨 Custom Smiling Critters Reference Artwork</div>
+          <p class="panel-subtitle">
+            Orbit 360° around SunnyFox &amp; LunaBat or tap their glowing pendants for firefly &amp; stardust bursts!
+          </p>
+          <div class="reference-cards-grid">
+            <div class="ref-card" id="ref-card-sunnyfox">
+              <img src="./assets/custom_critter_fox_lantern.jpg" alt="SunnyFox Reference Artwork" id="img-ref-fox" />
+              <h4>SunnyFox (LanternFox)</h4>
+              <p>Coral Left Eye Patch &amp; Glowing Storm Lantern</p>
+              <button class="action-chip" data-tap-char="SunnyFox" id="btn-tap-fox">
+                🏮 Sparkle Lantern
+              </button>
+            </div>
+            <div class="ref-card" id="ref-card-lunabat">
+              <img src="./assets/custom_critter_bat_moonstar.jpg" alt="LunaBat Reference Artwork" id="img-ref-bat" />
+              <h4>LunaBat (StarBat)</h4>
+              <p>Quilted Bat Wings &amp; Crescent Moon-Star</p>
+              <button class="action-chip" data-tap-char="LunaBat" id="btn-tap-bat">
+                🌙 Sparkle Moon-Star
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="studio-right-col">
+        <div class="glass-panel">
+          <div class="panel-title">🎭 3D Procedural Character Animations</div>
+          <p class="panel-subtitle">Real-time skeletal &amp; plush animations for both characters:</p>
+          <div class="chip-grid">
+            <button class="action-chip active" data-anim-btn="idle">✨ Idle &amp; Ear Twitch</button>
+            <button class="action-chip" data-anim-btn="wave">👋 Joyful Wave to Mom</button>
+            <button class="action-chip" data-anim-btn="wingFlapTailWag">🦇 Wing Flap &amp; Tail Wag</button>
+            <button class="action-chip" data-anim-btn="bounceDance">🎵 Happy Bounce Dance</button>
+            <button class="action-chip" data-anim-btn="barrelRollCheer">🌀 Barrel-Roll Cheer</button>
+            <button class="action-chip" data-anim-btn="cockpitPilotSteer">🕹️ Cockpit Pilot Steer</button>
+          </div>
+
+          <div class="panel-title" style="margin-top: 12px;">🥽 3D Pilot Accessories &amp; Crew Roles</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-accessory-toggle="SunnyFox:aviatorGoggles">🦊 Fox Goggles</button>
+            <button class="action-chip active" data-accessory-toggle="SunnyFox:pilotScarf">🧣 Fox Scarf</button>
+            <button class="action-chip" data-accessory-toggle="SunnyFox:captainCap">🧢 Fox Captain Cap</button>
+            <button class="action-chip active" data-accessory-toggle="LunaBat:aviatorGoggles">🦇 Bat Goggles</button>
+            <button class="action-chip" data-accessory-toggle="LunaBat:pilotScarf">🧣 Bat Scarf</button>
+            <button class="action-chip active" data-accessory-toggle="LunaBat:captainCap">🧢 Bat Captain Cap</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: 3D SKY FLIGHT SIMULATOR ==================== -->
+    <section class="view-overlay" id="view-flight-simulator" data-view="flight_simulator">
+      <div class="flight-top-hud">
+        <div class="glass-panel flight-telemetry-bar">
+          <div class="metric-pill">
+            <span class="label">Pilot in Command</span>
+            <span class="val" id="hud-pilot-name">🦊 SunnyFox (LanternFox)</span>
+          </div>
+          <div class="metric-pill">
+            <span class="label">Co-Pilot / Wing-Walker</span>
+            <span class="val" id="hud-copilot-name">🦇 LunaBat (StarBat)</span>
+          </div>
+          <div class="metric-pill">
+            <span class="label">Sky Score</span>
+            <span class="val" id="hud-score-val">0</span>
+          </div>
+          <div class="metric-pill">
+            <span class="label">Rings Passed</span>
+            <span class="val" id="hud-rings-val">0</span>
+          </div>
+        </div>
+
+        <div class="glass-panel route-progress-box">
+          <div class="route-header">
+            <span id="hud-zone-val">Zone 1: Golden Gate Sunrise Takeoff</span>
+            <span id="hud-miles-val">0 / 2700 mi</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="hud-route-progress-fill"></div>
+          </div>
+          <div class="chip-grid" style="margin-top: 8px;">
+            <button class="action-chip" data-zone-btn="1">🌉 Zone 1: SF Golden Gate</button>
+            <button class="action-chip" data-zone-btn="2">🌈 Zone 2: Rainbow Clouds</button>
+            <button class="action-chip" data-zone-btn="3">🌌 Zone 3: Boston Night</button>
+            <button class="action-chip active" data-time-btn="day" id="btn-time-day">☀️ Day</button>
+            <button class="action-chip" data-time-btn="sunset" id="btn-time-sunset">🌅 Sunset</button>
+            <button class="action-chip" data-time-btn="night" id="btn-time-night">🌙 Night Lantern Glow</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boston Landing Celebration Banner -->
+      <div class="landing-banner" id="boston-landing-banner">
+        <h2 style="color: #ffd966; margin-bottom: 8px;">🎉 Welcome to Boston! Zakim Bridge Touchdown! 🏙️💖</h2>
+        <p style="font-size: 0.9rem; color: #fdfaf2; margin-bottom: 14px;">
+          SunnyFox &amp; LunaBat flew all 2,700 miles from Mom at the Golden Gate Bridge in San Francisco to Daughter in Boston!
+        </p>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <button class="stunt-btn boost" id="btn-flight-restart">✈️ Fly SF ➔ Boston Again</button>
+        </div>
+      </div>
+
+      <div class="flight-bottom-controls">
+        <div class="thumbstick-container" id="flight-thumbstick">
+          <div class="thumbstick-knob" id="flight-thumbstick-knob"></div>
+          <span class="thumbstick-label">Touch Drag or WASD / Arrows</span>
+        </div>
+
+        <div class="flight-action-pad">
+          <button class="stunt-btn boost" id="btn-flight-boost">🚀 Starlight Boost</button>
+          <button class="stunt-btn roll" id="btn-flight-barrel-roll">🌀 360° Barrel Roll</button>
+          <button class="stunt-btn heart" id="btn-flight-heart-drop">💖 Drop Mom's Care Package</button>
+          <button class="stunt-btn swap" id="btn-swap-roles" data-action="swap-roles">🔄 Swap Pilot ↔ Co-Pilot</button>
+          <button class="action-chip" id="btn-copilot-mode">🪑 Mode: Rear Cockpit</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: 3D AIRPLANE HANGAR ==================== -->
+    <section class="view-overlay" id="view-hangar" data-view="hangar">
+      <div class="hangar-sidebar">
+        <div class="glass-panel">
+          <div class="panel-title">✈️ Select 3D Aircraft Model</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-plane-model="biplane">🛩️ Critter Cloud Biplane</button>
+            <button class="action-chip" data-plane-model="supersonic_jet">🚀 Starlight Supersonic Jet</button>
+            <button class="action-chip" data-plane-model="origami_glider">🕊️ Origami Dream Glider</button>
+          </div>
+
+          <div class="panel-title" style="margin-top: 12px;">🎨 Fuselage &amp; Wing Paint Palette</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-paint-palette="sunset_fox_amber">🟠 Sunset Fox Amber</button>
+            <button class="action-chip" data-paint-palette="midnight_bat_indigo">🟣 Midnight Bat Indigo</button>
+            <button class="action-chip" data-paint-palette="huntrx_golden_neon">✨ HUNTR/X Golden Neon</button>
+            <button class="action-chip" data-paint-palette="mint_cloud">🌿 Mint Cloud</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hangar-sidebar">
+        <div class="glass-panel">
+          <div class="panel-title">⚙️ Propeller &amp; Thruster Style</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-propeller-style="classic_wood_brass">🪵 Classic Wood &amp; Brass</button>
+            <button class="action-chip" data-propeller-style="starlight_crystal_turbine">💎 Starlight Crystal Turbine</button>
+            <button class="action-chip" data-propeller-style="rainbow_flower_pinwheel">🌸 Rainbow Flower Pinwheel</button>
+          </div>
+
+          <div class="panel-title" style="margin-top: 12px;">🌈 Sky-Writing Contrail Particles</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-contrail-style="rainbow_ribbon">🌈 Rainbow Ribbon</button>
+            <button class="action-chip" data-contrail-style="lantern_fireflies">🏮 Lantern Fireflies</button>
+            <button class="action-chip" data-contrail-style="starlight_moon_dust">🌙 Starlight Moon Dust</button>
+            <button class="action-chip" data-contrail-style="heart_bubbles">💖 Heart Bubbles</button>
+          </div>
+
+          <div class="panel-title" style="margin-top: 12px;">🛡️ Wing Decal Emblem</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-wing-emblem="fox_lantern_crest">🏮 Fox Lantern Crest</button>
+            <button class="action-chip" data-wing-emblem="bat_moonstar_crest">🌙 Bat Moon-Star Crest</button>
+            <button class="action-chip" data-wing-emblem="sf_boston_heart_wings">💖 SF ✈️ Boston Heart Wings</button>
+            <button class="action-chip" data-wing-emblem="golden_star_crown">👑 Golden Star Crown</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: COCKPIT & SKY PHOTO BOOTH ==================== -->
+    <section class="view-overlay" id="view-photo-booth" data-view="photo_booth">
+      <div class="photobooth-sidebar">
+        <div class="glass-panel">
+          <div class="panel-title">🌆 Sky Backdrop &amp; Duo Pose</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-backdrop-id="sf_golden_gate_sunrise">🌉 SF Golden Gate Sunrise</button>
+            <button class="action-chip" data-backdrop-id="rainbow_cloud_archipelago">🌈 Rainbow Cloud Archipelago</button>
+            <button class="action-chip" data-backdrop-id="boston_zakim_starlight">🏙️ Boston Zakim Starlight</button>
+            <button class="action-chip" data-backdrop-id="sweet_hangar_studio">✨ Starlight Hangar Studio</button>
+          </div>
+
+          <div class="panel-title" style="margin-top: 12px;">🦊🦇 Character Duo Pose</div>
+          <div class="chip-grid">
+            <button class="action-chip active" data-pose-id="tandem_wave">👋 Tandem Cockpit Wave</button>
+            <button class="action-chip" data-pose-id="wing_walker_cheer">🦇 Wing-Walker Stunt Cheer</button>
+            <button class="action-chip" data-pose-id="lantern_and_moonstar_glow">🏮🌙 Lantern &amp; Moon-Star Glow</button>
+            <button class="action-chip" data-pose-id="happy_bounce_duet">🎵 Happy Bounce Duet</button>
+          </div>
+
+          <div class="panel-title" style="margin-top: 12px;">💌 Postcard Message for Mom in SF</div>
+          <input
+            type="text"
+            class="text-input"
+            id="photobooth-caption-input"
+            value="Flying from Mom in San Francisco ✈️ to Boston with SunnyFox &amp; LunaBat! 💖"
+            aria-label="Postcard Caption"
+          />
+          <div style="margin-top: 10px; display: flex; gap: 8px;">
+            <button class="stunt-btn boost" id="btn-capture-postcard" style="width: 100%; justify-content: center;">
+              📸 Snap 3D Flight Postcard PNG
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="postcard-preview-box">
+        <div class="glass-panel">
+          <div class="panel-title">🖼️ Captured 3D Postcard Preview</div>
+          <canvas id="photo-booth-preview-img" width="640" height="360"></canvas>
+          <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+            <a
+              id="btn-download-postcard"
+              class="action-chip active"
+              href="./assets/custom_critter_fox_lantern.jpg"
+              download="sf-to-boston-3d-postcard.png"
+              style="text-decoration: none;"
+            >
+              ⬇️ Download PNG for Mom
+            </a>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">Saved in iPad Gallery</span>
+          </div>
+          <div class="saved-gallery-strip" id="saved-postcards-strip"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Local Offline Three.js r161 + OrbitControls -->
+  <script src="./src/vendor/three.min.js"></script>
+  <script src="./src/vendor/OrbitControls.js"></script>
+  <script type="module" src="./src/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
